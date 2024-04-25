@@ -96,27 +96,16 @@ const filterOptions = [
     options: ['Free', 'Paid'],
   },
   {
-    title: 'Industry',
-    options: [
-      'Baby and kids',
-      'Food and drink',
-      'Home and decor',
-      'Toys and games',
-    ],
+    title: 'Color',
+    options: ['Black', 'White', 'Red'],
   },
   {
-    title: 'Catalog Size',
-    options: ['1-9 Products', '10-199 Products', '200+ Products'],
+    title: 'Size',
+    options: ['M', 'L', 'XL'],
   },
   {
-    title: 'Features',
-    options: [
-      'Age verifier',
-      'Event calendar',
-      'Infinite scroll',
-      'Mega menu',
-      'Store locator',
-    ],
+    title: 'Gender',
+    options: ['Male', 'Female'],
   },
 ];
 
