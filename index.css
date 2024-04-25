@@ -20,7 +20,6 @@ header {
   padding-bottom: 3vh;
   font-size: 1.4vw;
   align-items: center;
-  /* justify-content: space-between; */
 }
 
 #logo_img {
@@ -83,4 +82,25 @@ header {
   h1{
     padding-left: 8vw;
   }
+}
+
+.main_section_products{
+  padding-left: 8vw;
+  padding-right: 8vw;
+  margin-top: 8vh;
+  display: flex;
+  gap: 4vw;
+}
+
+.filter_left_section{
+  width: 29%;
+  background-color: #fafafa;
+  border-radius: 5px;
+}
+
+
+.products_right_section{
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
 }
