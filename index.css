@@ -2,14 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
 
 /* HEADER */
-
 header {
   width: 90%;
   margin: auto;
@@ -18,7 +17,7 @@ header {
   height: fit-content;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   align-items: center;
 }
 
@@ -44,16 +43,20 @@ header {
 }
 
 #search_header_button {
-  max-width: 10px;
+  width: 20px;
   background-color: white;
   border: none;
-  i {
-    font-size: 1.4vw;
-    color: #212326;
-  }
+  cursor: pointer;
 }
 
-.log_in {
+#search_header_button:hover i {
+  color: #0000009d;
+}
+
+.header-actions {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 25px;
   li {
     list-style-type: none;
     a {
@@ -63,7 +66,11 @@ header {
   }
 }
 
-.log_in_search {
+.log_in_button {
+  cursor: pointer;
+}
+
+.header-actions-wrapper {
   display: flex;
   gap: 2vw;
   justify-content: end;
@@ -73,7 +80,7 @@ header {
 .browse_section {
   width: 100%;
   background-color: #f4f4f4;
-  height: 25vh;
+  height: 10rem;
   font-size: 2.2vw;
   font-weight: 1000;
   align-content: center;
@@ -94,7 +101,6 @@ header {
     padding-left: 6vw;
   }
 }
-
 
 /* CARDS SECTION */
 .products_right_section {
@@ -134,7 +140,7 @@ header {
 
 .card p {
   font-size: 0.7rem;
-} 
+}
 
 canvas {
   border: 1px solid black;
@@ -143,14 +149,14 @@ canvas {
   width: 1.5rem;
 }
 
-.flex_price_color{
+.flex_price_color {
   display: flex;
   justify-content: space-between;
   align-content: center;
   align-items: center;
 }
 
-#card-price{
+#card-price {
   border: 1px solid black;
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   color: black;
@@ -163,11 +169,11 @@ canvas {
   align-content: center;
 }
 
-#add_to_cart_button{
+#add_to_cart_button {
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   height: fit-content;
   color: white;
-  border:none;
+  border: none;
   border-radius: 10px;
 }
 
@@ -178,14 +184,15 @@ canvas {
   color: white;
   border-radius: 10px;
 }
-.gender_size{
+.gender_size {
   display: flex;
   gap: 0.5rem;
 }
-#card-gender , #card-size{
+#card-gender,
+#card-size {
   font-size: 1rem;
   font-weight: 600;
-  background-color:rgb(244,244,244);
+  background-color: rgb(244, 244, 244);
   height: fit-content;
   width: fit-content;
   padding: 0.3rem;
