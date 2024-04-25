@@ -15,6 +15,7 @@ function cloneCardTemplate(data) {
   const cardGender = clone.querySelector('#card-gender');
   const cardColor = clone.querySelector('#card-color');
   const cardSize = clone.querySelector('#card-size');
+
   clone.querySelector('#add_to_cart_button').addEventListener('click', () => {
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
     cartItems.push(data);
@@ -49,6 +50,16 @@ dropdownList.addEventListener('click', function (event) {
     const sortedData = sortByName(dataArray, sortOrder);
 
     console.log(sortedData);
+    saveDataToLocalStorage(sortedData);
+    filteredCards =
+      JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+
+    cardContainer.innerHTML = '';
+
+    sortedData.forEach((data) => {
+      const cardClone = cloneCardTemplate(data);
+      cardContainer.appendChild(cardClone);
+    });
   }
 });
 
@@ -243,6 +254,36 @@ const dataArray = [
     color: 'blue',
     size: 'M',
   },
+  {
+    title: 'Elevated Essentials',
+    description: 'Elevated basics to elevate your wardrobe.',
+    image:
+      'https://i.pinimg.com/736x/94/8e/5b/948e5b5ccf6ea60cb68d0807dcd5c96f.jpg',
+    price: 106,
+    gender: 'female',
+    color: 'red',
+    size: 'M',
+  },
+  {
+    title: 'Outdoor Modern',
+    description: 'Modern style for the great outdoors.',
+    image:
+      'https://i.pinimg.com/564x/fc/89/b8/fc89b8f94d64059abde3817d1c172e87.jpg',
+    price: 86,
+    gender: 'female',
+    color: 'brown',
+    size: 'S',
+  },
+  {
+    title: 'Tailored Transition',
+    description: 'Versatile pieces for work or play.',
+    image:
+      'https://i.pinimg.com/564x/ad/a7/48/ada74809f9af3c4b4ce769ab88528bed.jpg',
+    price: 76,
+    gender: 'male',
+    color: 'red',
+    size: 'M',
+  },
 ];
 
 saveDataToLocalStorage(dataArray);
@@ -263,7 +304,7 @@ function drawCircle(color) {
   return canvas;
 }
 
-const filteredCards =
+let filteredCards =
   JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
 
 filteredCards.forEach((data) => {
