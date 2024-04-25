@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -17,7 +17,7 @@ header {
   height: fit-content;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   align-items: center;
 }
 
@@ -94,8 +94,10 @@ header {
   width: 90%;
   margin: auto;
   margin-top: 8vh;
+  gap: 40px;
   display: flex;
-  gap: 2vw;
+  /* gap: 20px; */
+  /* justify-content: space-between; */
   h1 {
     padding-left: 6vw;
   }
@@ -103,9 +105,10 @@ header {
 
 /* CARDS SECTION */
 .products_right_section {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6vh;
+  gap: 5vh;
   flex-wrap: wrap;
   border-radius: 10px;
 }
@@ -113,9 +116,8 @@ header {
 #card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2vw;
-  position: relative;
-  z-index: 1;
+  /* justify-content: space-between; */
+  gap: 30px;
 }
 
 .card {
@@ -131,11 +133,9 @@ header {
 }
 
 #card-image {
-  height: 18rem;
+  height: 60%;
   width: 100%;
   object-fit: cover;
-}
-.card h2 {
 }
 
 .card p {
@@ -175,6 +175,7 @@ canvas {
   color: white;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #add_to_cart_button h3 {
@@ -184,19 +185,7 @@ canvas {
   color: white;
   border-radius: 10px;
 }
-.gender_size {
-  display: flex;
-  gap: 0.5rem;
-}
-#card-gender,
-#card-size {
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: rgb(244, 244, 244);
-  height: fit-content;
-  width: fit-content;
-  padding: 0.3rem;
-}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -247,6 +236,21 @@ canvas {
 .dropdown-list li:hover {
   background-color: #ddd;
 }
+
+.gender_size {
+  display: flex;
+  gap: 0.5rem;
+}
+#card-gender,
+#card-size {
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: rgb(244, 244, 244);
+  height: fit-content;
+  width: fit-content;
+  padding: 0.3rem;
+}
+
 @media only screen and (max-width: 600px) {
   .card {
     width: calc(50% - 20px);

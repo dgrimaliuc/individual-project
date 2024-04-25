@@ -1,8 +1,15 @@
 const cartWrapper = document.querySelector('.cart-wrapper');
+const isCartOpenKey = 'isCartOpen';
+const isCartOpen = JSON.parse(localStorage.getItem(isCartOpenKey)) ?? false;
+
+function updateCartState() {
+  cartWrapper.classList.toggle('active');
+  localStorage.setItem('isCartOpen', !isCartOpen);
+}
 
 const cartButton = document.querySelector('.cart-button');
 cartButton.addEventListener('click', () => {
-  cartWrapper.classList.toggle('active');
+  updateCartState();
 });
 
 document.addEventListener('click', (e) => {
@@ -11,18 +18,16 @@ document.addEventListener('click', (e) => {
     cartWrapper.contains(e.target)
   )
     return;
+
   cartWrapper.classList.remove('active');
+  localStorage.setItem('isCartOpen', false);
 });
 
-const cartItems = localStorage.getItem('cart') ?? [
-  {
-    title: 'T-Shirt - Nike',
-    price: 100,
-    color: 'Yellow',
-    size: 'XL',
-    image: './assets/TShirt-Yellow.webp',
-  },
-];
+if (isCartOpen) {
+  cartWrapper.classList.add('active');
+}
+
+const cartItems = JSON.parse(localStorage.getItem('cart')) ?? [];
 
 function addCartItem(item) {
   // Create caret icon
@@ -77,6 +82,14 @@ function addCartItem(item) {
   const removeButton = document.createElement('button');
   removeButton.classList.add('remove-item');
   removeButton.textContent = 'Remove';
+  removeButton.addEventListener('click', () => {
+    const index = cartItems.findIndex(
+      (cartItem) => cartItem.title === item.title
+    );
+    cartItems.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    location.reload();
+  });
 
   // Append cart card info and remove button to cart card body
   cartCardBody.appendChild(cartCardInfo);
@@ -92,6 +105,20 @@ function addCartItem(item) {
   // Append caret icon and cart cards wrapper to cart wrapper
   cartWrapper.appendChild(caretIcon);
   cartWrapper.appendChild(cartCardsWrapper);
+}
+
+function createEmptyCart() {
+  const emptyCartContainer = document.createElement('div');
+  emptyCartContainer.classList.add('empty-cart-container');
+  const emptyCart = document.createElement('h5');
+  emptyCart.textContent = 'Your cart is empty';
+  emptyCartContainer.appendChild(emptyCart);
+  emptyCart.classList.add('empty-cart-title');
+  cartWrapper.appendChild(emptyCartContainer);
+}
+
+if (cartItems.length === 0) {
+  createEmptyCart();
 }
 
 cartItems.forEach((item) => {

@@ -157,11 +157,22 @@ const filterOptions = [
   },
   {
     title: 'Color',
-    options: ['Black', 'White', 'Red', 'Yellow'],
+    options: [
+      'Black',
+      'White',
+      'Red',
+      'Yellow',
+      'Green',
+      'Blue',
+      'Purple',
+      'Gray',
+      'Beige',
+      'Brown',
+    ],
   },
   {
     title: 'Size',
-    options: ['M', 'L', 'XL'],
+    options: ['S', 'M', 'L', 'XL'],
   },
   {
     title: 'Gender',
