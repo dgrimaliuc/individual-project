@@ -34,6 +34,7 @@
 
 .cart-wrapper.active {
   display: block;
+  min-height: 120px;
 }
 
 .cart-wrapper {
@@ -69,6 +70,7 @@
 }
 
 .cart-card-image {
+  min-width: 80px;
   object-fit: cover;
   overflow: hidden;
   height: 100px;
@@ -96,4 +98,23 @@
 
 .remove-item:hover {
   color: #ff0000;
+}
+
+.empty-cart-container {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 95%;
+  background-color: white;
+  margin-top: 8px;
+  border-radius: 10px;
+}
+
+/* .cart-wrapper.active h5 {
+  color: #000000;
+} */
+.empty-cart-title {
+  font-size: 1.2rem;
 }

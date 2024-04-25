@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -17,7 +17,7 @@ header {
   height: fit-content;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   align-items: center;
 }
 
@@ -94,8 +94,10 @@ header {
   width: 90%;
   margin: auto;
   margin-top: 8vh;
+  gap: 20px;
   display: flex;
-  gap: 2vw;
+  /* gap: 20px; */
+  /* justify-content: space-between; */
   h1 {
     padding-left: 6vw;
   }
@@ -103,9 +105,10 @@ header {
 
 /* CARDS SECTION */
 .products_right_section {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6vh;
+  gap: 5vh;
   flex-wrap: wrap;
   border-radius: 10px;
 }
@@ -115,8 +118,6 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2px;
-  position: relative;
-  z-index: 1;
 }
 
 .card {
@@ -132,7 +133,7 @@ header {
 }
 
 #card-image {
-  height: 18rem;
+  height: 60%;
   width: 100%;
   object-fit: cover;
 }
@@ -176,6 +177,7 @@ canvas {
   color: white;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #add_to_cart_button h3 {
@@ -198,56 +200,7 @@ canvas {
   width: fit-content;
   padding: 0.3rem;
 }
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.sort_section_cards {
-  display: flex;
-  justify-content: space-around;
-  align-self: end;
-  gap: 20px;
-  border: 1px solid black;
-  width: 15vw;
-  height: fit-content;
-  padding: 0.6rem;
-  border-radius: 7px;
-  align-content: center;
-}
 
-.sort_section_cards i {
-  border-left: 1px solid black;
-  padding: 0.8rem;
-  color: #888888;
-  font-size: 1.2rem;
-  height: 3vh;
-  align-content: center;
-}
-
-.text p {
-  font-size: 0.8rem;
-  color: #212326;
-}
-
-.dropdown-list {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 5vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 20;
-}
-
-.dropdown-list li {
-  padding: 8px 12px;
-  cursor: pointer;
-  list-style-type: none;
-}
-
-.dropdown-list li:hover {
-  background-color: #ddd;
-}
 @media only screen and (max-width: 600px) {
   .card {
     width: calc(50% - 20px);

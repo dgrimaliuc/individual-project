@@ -14,15 +14,7 @@ document.addEventListener('click', (e) => {
   cartWrapper.classList.remove('active');
 });
 
-const cartItems = localStorage.getItem('cart') ?? [
-  {
-    title: 'T-Shirt - Nike',
-    price: 100,
-    color: 'Yellow',
-    size: 'XL',
-    image: './assets/TShirt-Yellow.webp',
-  },
-];
+const cartItems = JSON.parse(localStorage.getItem('cart')) ?? [];
 
 function addCartItem(item) {
   // Create caret icon
@@ -77,6 +69,14 @@ function addCartItem(item) {
   const removeButton = document.createElement('button');
   removeButton.classList.add('remove-item');
   removeButton.textContent = 'Remove';
+  removeButton.addEventListener('click', () => {
+    const index = cartItems.findIndex(
+      (cartItem) => cartItem.title === item.title
+    );
+    cartItems.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    location.reload();
+  });
 
   // Append cart card info and remove button to cart card body
   cartCardBody.appendChild(cartCardInfo);
@@ -94,6 +94,15 @@ function addCartItem(item) {
   cartWrapper.appendChild(cartCardsWrapper);
 }
 
+if (cartItems.length === 0) {
+  const emptyCartContainer = document.createElement('div');
+  emptyCartContainer.classList.add('empty-cart-container');
+  const emptyCart = document.createElement('h5');
+  emptyCart.textContent = 'Your cart is empty';
+  emptyCartContainer.appendChild(emptyCart);
+  emptyCart.classList.add('empty-cart-title');
+  cartWrapper.appendChild(emptyCartContainer);
+}
 cartItems.forEach((item) => {
   addCartItem(item);
 });
