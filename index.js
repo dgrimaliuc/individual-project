@@ -18,17 +18,17 @@ const dataArray = [
   {
     title: 'Card 1',
     description: 'This is card 1',
-    image: 'https://via.placeholder.com/150'
+    image: 'https://via.placeholder.com/150',
   },
   {
     title: 'Card 2',
     description: 'This is card 2',
-    image: 'https://via.placeholder.com/150'
-  }
+    image: 'https://via.placeholder.com/150',
+  },
   // ... more data objects
 ];
 
-dataArray.forEach(data => {
+dataArray.forEach((data) => {
   const cardClone = cloneCardTemplate(data);
   cardContainer.appendChild(cardClone);
 });
