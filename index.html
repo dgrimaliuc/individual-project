@@ -22,6 +22,7 @@
 
     <link rel="icon" href="shopify_logo.png" />
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="cart.css" />
     <link rel="stylesheet" href="filtering-section.css" />
   </head>
 
@@ -38,18 +39,28 @@
         <li>Collections</li>
         <li><a href="#">All themes</a></li>
       </ul>
-      <div class="log_in_search">
-        <button type="button" id="search_header_button">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <ul class="log_in">
-          <li><a href="#">Log in</a></li>
+      <div class="header-actions-wrapper">
+        <ul class="header-actions">
+          <li>
+            <span id="search_header_button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+          </li>
+          <li>
+            <span class="log_in_button">Log in</span>
+          </li>
+          <li class="cart-container">
+            <span class="cart-button">
+              <i class="fa fa-shopping-bag"></i>
+            </span>
+            <div class="cart-wrapper"></div>
+          </li>
         </ul>
       </div>
     </header>
 
     <!-- BODY -->
-    <body>
+    <div>
       <section class="browse_section">
         <h1>Browse all themes</h1>
       </section>
@@ -69,19 +80,21 @@
                 <p id="card-color"></p>
                 <p id="card-price"></p>
               </div>
-              
-             <div class="gender_size">
-              <p id="card-size"></p>
-              <p id="card-gender"></p>
-             </div>
-             
-              <button type="button" id="add_to_cart_button"><h3><i class="fa-solid fa-cart-shopping"></i> Add to cart</h3></button>
 
+              <div class="gender_size">
+                <p id="card-size"></p>
+                <p id="card-gender"></p>
+              </div>
+
+              <button type="button" id="add_to_cart_button">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Add to cart</h3>
+              </button>
             </div>
           </template>
         </div>
       </section>
-    </body>
+    </div>
+    <script src="cart.js"></script>
     <script src="filters.js"></script>
     <script src="index.js"></script>
   </body>
