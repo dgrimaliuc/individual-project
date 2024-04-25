@@ -1,78 +1,6 @@
 const cardContainer = document.getElementById('card-container');
 const cardTemplate = document.getElementById('card-template');
 
-function saveDataToLocalStorage(dataArray) {
-  localStorage.setItem('shop-items', JSON.stringify(dataArray));
-}
-
-function cloneCardTemplate(data) {
-  const clone = cardTemplate.content.cloneNode(true);
-
-  const cardImage = clone.querySelector('#card-image');
-  const cardTitle = clone.querySelector('#card-title');
-  const cardDescription = clone.querySelector('#card-description');
-  const cardPrice = clone.querySelector('#card-price');
-  const cardGender = clone.querySelector('#card-gender');
-  const cardColor = clone.querySelector('#card-color');
-  const cardSize = clone.querySelector('#card-size');
-
-  clone.querySelector('#add_to_cart_button').addEventListener('click', () => {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    cartItems.push(data);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    location.reload();
-  });
-
-  cardImage.src = data.image;
-  cardTitle.textContent = data.title;
-  cardDescription.textContent = data.description;
-  const circle = drawCircle(data.color);
-  cardColor.appendChild(circle);
-  cardPrice.textContent = `$${data.price}`;
-  cardSize.textContent = `Size: ${data.size}`;
-  cardGender.textContent = `${data.gender}`;
-
-  return clone;
-}
-
-const dropdownIcon = document.getElementById('dropdownIcon');
-const dropdownList = document.getElementById('dropdownList');
-const sortText = document.getElementById('sortText');
-
-dropdownIcon.addEventListener('click', function () {
-  dropdownList.style.display =
-    dropdownList.style.display === 'none' ? 'block' : 'none';
-});
-
-dropdownList.addEventListener('click', function (event) {
-  if (event.target.tagName === 'LI') {
-    const sortOrder = event.target.textContent.toLowerCase();
-    const sortedData = sortByName(dataArray, sortOrder);
-
-    console.log(sortedData);
-    saveDataToLocalStorage(sortedData);
-    filteredCards =
-      JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
-
-    cardContainer.innerHTML = '';
-
-    sortedData.forEach((data) => {
-      const cardClone = cloneCardTemplate(data);
-      cardContainer.appendChild(cardClone);
-    });
-  }
-});
-
-function sortByName(dataArray, order) {
-  return dataArray.sort((a, b) => {
-    if (order === 'ascending') {
-      return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
-    } else {
-      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
-    }
-  });
-}
-
 const dataArray = [
   {
     title: 'Durable Essence',
@@ -286,6 +214,81 @@ const dataArray = [
   },
 ];
 
+let filteredCards =
+  JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+
+function saveDataToLocalStorage(dataArray) {
+  localStorage.setItem('shop-items', JSON.stringify(dataArray));
+}
+
+function cloneCardTemplate(data) {
+  const clone = cardTemplate.content.cloneNode(true);
+
+  const cardImage = clone.querySelector('#card-image');
+  const cardTitle = clone.querySelector('#card-title');
+  const cardDescription = clone.querySelector('#card-description');
+  const cardPrice = clone.querySelector('#card-price');
+  const cardGender = clone.querySelector('#card-gender');
+  const cardColor = clone.querySelector('#card-color');
+  const cardSize = clone.querySelector('#card-size');
+
+  clone.querySelector('#add_to_cart_button').addEventListener('click', () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.push(data);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    location.reload();
+  });
+
+  cardImage.src = data.image;
+  cardTitle.textContent = data.title;
+  cardDescription.textContent = data.description;
+  const circle = drawCircle(data.color);
+  cardColor.appendChild(circle);
+  cardPrice.textContent = `$${data.price}`;
+  cardSize.textContent = `Size: ${data.size}`;
+  cardGender.textContent = `${data.gender}`;
+
+  return clone;
+}
+
+const dropdownIcon = document.getElementById('dropdownIcon');
+const dropdownList = document.getElementById('dropdownList');
+const sortText = document.getElementById('sortText');
+
+dropdownIcon.addEventListener('click', function () {
+  dropdownList.style.display =
+    dropdownList.style.display === 'none' ? 'block' : 'none';
+});
+
+dropdownList.addEventListener('click', function (event) {
+  if (event.target.tagName === 'LI') {
+    const sortOrder = event.target.textContent.toLowerCase();
+    const sortedData = sortByName(filteredCards, sortOrder);
+
+    console.log(sortedData);
+    saveDataToLocalStorage(sortedData);
+    filteredCards =
+      JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+
+    cardContainer.innerHTML = '';
+
+    sortedData.forEach((data) => {
+      const cardClone = cloneCardTemplate(data);
+      cardContainer.appendChild(cardClone);
+    });
+  }
+});
+
+function sortByName(dataArray, order) {
+  return dataArray.sort((a, b) => {
+    if (order === 'ascending') {
+      return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
+    } else {
+      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
+    }
+  });
+}
+
 saveDataToLocalStorage(dataArray);
 
 function drawCircle(color) {
@@ -303,9 +306,6 @@ function drawCircle(color) {
 
   return canvas;
 }
-
-let filteredCards =
-  JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
 
 filteredCards.forEach((data) => {
   const cardClone = cloneCardTemplate(data);

@@ -185,6 +185,58 @@ canvas {
   color: white;
   border-radius: 10px;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sort_section_cards {
+  display: flex;
+  justify-content: space-around;
+  align-self: end;
+  gap: 20px;
+  border: 1px solid black;
+  width: 15vw;
+  height: fit-content;
+  padding: 0.6rem;
+  border-radius: 7px;
+  align-content: center;
+}
+
+.sort_section_cards i {
+  border-left: 1px solid black;
+  padding: 0.8rem;
+  color: #888888;
+  font-size: 1.2rem;
+  height: 3vh;
+  align-content: center;
+}
+
+.text p {
+  font-size: 0.8rem;
+  color: #212326;
+}
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 5vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+}
+
+.dropdown-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.dropdown-list li:hover {
+  background-color: #ddd;
+}
+
 .gender_size {
   display: flex;
   gap: 0.5rem;
