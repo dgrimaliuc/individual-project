@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -14,7 +14,7 @@ header {
   padding-left: 6vw;
   padding-right: 6vw;
   display: grid;
-  grid-template-columns: 1fr  2.5fr 1fr;
+  grid-template-columns: 1fr 2.5fr 1fr;
   height: fit-content;
   padding-top: 3vh;
   padding-bottom: 3vh;
@@ -79,35 +79,39 @@ header {
   font-size: 2.2vw;
   font-weight: 1000;
   align-content: center;
-  h1{
-    padding-left: 6vw;
+  h1 {
+    padding-left: 8vw;
   }
 }
 
-.main_section_products{
-  padding-left: 6vw;
-  padding-right: 6vw;
+.main_section_products {
+  width: 90%;
+  margin: auto;
   margin-top: 8vh;
   display: flex;
   gap: 2vw;
   justify-content: space-between;
+  h1 {
+    padding-left: 6vw;
+  }
 }
 
-/* SORTING SECTION */
-.filter_left_section{
-  width: 20vw;
+.products_right_section {
+  /* SORTING SECTION */
+  /* width: 20vw;
   height: fit-content;
   padding: 20px;
   background-color: #f4f4f4;
-  border-radius: 3px;
+  border-radius: 3px; */
 }
 
 /* CARDS SECTION */
-.products_right_section{
+.products_right_section {
   display: flex;
   flex-direction: column;
   gap: 10vh;
   flex-wrap: wrap;
+  border-radius: 10px;
 }
 
 #card-container {
@@ -135,12 +139,12 @@ header {
 
 @media only screen and (max-width: 600px) {
   .card {
-      width: calc(50% - 20px);
+    width: calc(50% - 20px);
   }
 }
 
 @media only screen and (max-width: 400px) {
   .card {
-      width: calc(100% - 20px);
+    width: calc(100% - 20px);
   }
 }

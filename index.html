@@ -21,8 +21,8 @@
     />
 
     <link rel="icon" href="shopify_logo.png" />
-
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="filtering-section.css" />
   </head>
 
   <body>
@@ -55,17 +55,9 @@
       </section>
       <!-- MAIN SECTION PRODUCTS -->
       <section class="main_section_products">
-
-        <!-- THIS IS THE FILTER SECTION - YOUR SECTION!! -->
-        <div class="filter_left_section">
-          erwfwer
-        </div>
+        <div class="filter_section" id="filter_section"></div>
         <!-- THIS IS CARDS, WHICH IS MINE -->
         <div class="products_right_section">
-          <div class="sort_section">
-            Sort section
-          </div>
-          
           <div id="card-container"></div>
           <template id="card-template">
             <div class="card">
@@ -77,10 +69,9 @@
             </div>
           </template>
         </div>
-
-
       </section>
     </body>
+    <script src="filters.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
