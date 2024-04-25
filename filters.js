@@ -1,16 +1,76 @@
-let selectedOptions = JSON.parse(localStorage.getItem('selectedOptions')) || [];
+const allCardsKey = 'shop-items';
+const filteredCardsKey = 'filtered-items';
+const filtersKey = 'selected-filters';
+let selectedOptions = JSON.parse(localStorage.getItem(filtersKey)) || {
+  Price: [],
+  Gender: [],
+  Color: [],
+  Size: [],
+};
+
+function applyFilter(item, filter) {
+  console.log(filter);
+  if (filter[1].length === 0) {
+    return true;
+  }
+  switch (filter[0]) {
+    // Filter price based on the selected price range
+    case 'Price':
+      return filter[1].some((price) => {
+        switch (price) {
+          case 'Under $25':
+            return item.price < 25;
+          case '$25 to $50':
+            return item.price >= 25 && item.price < 50;
+          case '$50 to $100':
+            return item.price >= 50 && item.price < 100;
+          case 'Over $100':
+            return item.price >= 100;
+          default:
+            return false;
+        }
+      });
+    case 'Color':
+      return filter[1].some((color) => color.toLowerCase() === item.color);
+    case 'Size':
+      return filter[1].includes(item.size);
+    case 'Gender':
+      return filter[1].some((gender) => gender.toLowerCase() === item.gender);
+    default:
+      return false;
+  }
+}
+
+function filterItems(options) {
+  const allItems = JSON.parse(localStorage.getItem(allCardsKey)) ?? [];
+  console.log('options', options);
+
+  const filteredItems = allItems.filter((item) => {
+    return Object.entries(options).every((option) => applyFilter(item, option));
+  });
+
+  localStorage.setItem(filteredCardsKey, JSON.stringify(filteredItems));
+}
+
+// Update selectedOptions with selected filter
 function updateSelectedOptions(option, isChecked) {
+  const pair = option.split(':');
+  const key = pair[0];
+  const value = pair[1];
+
   if (isChecked) {
-    selectedOptions.push(option);
+    selectedOptions[key].push(value);
   } else {
-    const index = selectedOptions.indexOf(option);
+    const index = selectedOptions[key].indexOf(value);
     if (index !== -1) {
-      selectedOptions.splice(index, 1);
+      selectedOptions[key].splice(index, 1);
     }
   }
   // Update localStorage
-  localStorage.setItem('selectedOptions', JSON.stringify(selectedOptions));
-  console.log(selectedOptions); // You can replace this with your desired action
+  localStorage.setItem(filtersKey, JSON.stringify(selectedOptions));
+  filterItems(selectedOptions);
+  // Reload page to apply filters
+  location.reload();
 }
 
 // Function to create filter sections
@@ -58,7 +118,7 @@ function createFilterSection(title, options) {
     checkbox.setAttribute('section-type', title);
     checkbox.setAttribute('value', option);
     checkbox.classList.add('marketing-checkbox');
-    checkbox.checked = selectedOptions.includes(`${title}:${option}`);
+    checkbox.checked = selectedOptions[title].includes(option);
 
     checkbox.addEventListener('change', () => {
       updateSelectedOptions(`${title}:${option}`, checkbox.checked);
@@ -93,11 +153,11 @@ function renderFilterSections(filterOptions) {
 const filterOptions = [
   {
     title: 'Price',
-    options: ['Free', 'Paid'],
+    options: ['Under $25', '$25 to $50', '$50 to $100', 'Over $100'],
   },
   {
     title: 'Color',
-    options: ['Black', 'White', 'Red'],
+    options: ['Black', 'White', 'Red', 'Yellow'],
   },
   {
     title: 'Size',

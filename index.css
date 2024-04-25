@@ -96,7 +96,6 @@ header {
   margin-top: 8vh;
   display: flex;
   gap: 2vw;
-  justify-content: space-between;
   h1 {
     padding-left: 6vw;
   }

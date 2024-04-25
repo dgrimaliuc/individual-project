@@ -1,8 +1,13 @@
 const cardContainer = document.getElementById('card-container');
 const cardTemplate = document.getElementById('card-template');
 
+function saveDataToLocalStorage(dataArray) {
+  localStorage.setItem('shop-items', JSON.stringify(dataArray));
+}
+
 function cloneCardTemplate(data) {
   const clone = cardTemplate.content.cloneNode(true);
+
   const cardImage = clone.querySelector('#card-image');
   const cardTitle = clone.querySelector('#card-title');
   const cardDescription = clone.querySelector('#card-description');
@@ -86,6 +91,8 @@ const dataArray = [
   },
 ];
 
+saveDataToLocalStorage(dataArray);
+
 function drawCircle(color) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -102,14 +109,10 @@ function drawCircle(color) {
   return canvas;
 }
 
-dataArray.forEach((data) => {
+const filteredCards =
+  JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+
+filteredCards.forEach((data) => {
   const cardClone = cloneCardTemplate(data);
   cardContainer.appendChild(cardClone);
 });
-
-function saveDataToLocalStorage(dataArray) {
-  dataArray.forEach((data, index) => {
-    localStorage.setItem(`tshirtData_${index}`, JSON.stringify(data));
-  });
-}
-saveDataToLocalStorage(dataArray);
