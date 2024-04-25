@@ -1,8 +1,15 @@
 const cartWrapper = document.querySelector('.cart-wrapper');
+const isCartOpenKey = 'isCartOpen';
+const isCartOpen = JSON.parse(localStorage.getItem(isCartOpenKey)) ?? false;
+
+function updateCartState() {
+  cartWrapper.classList.toggle('active');
+  localStorage.setItem('isCartOpen', !isCartOpen);
+}
 
 const cartButton = document.querySelector('.cart-button');
 cartButton.addEventListener('click', () => {
-  cartWrapper.classList.toggle('active');
+  updateCartState();
 });
 
 document.addEventListener('click', (e) => {
@@ -11,8 +18,14 @@ document.addEventListener('click', (e) => {
     cartWrapper.contains(e.target)
   )
     return;
+
   cartWrapper.classList.remove('active');
+  localStorage.setItem('isCartOpen', false);
 });
+
+if (isCartOpen) {
+  cartWrapper.classList.add('active');
+}
 
 const cartItems = JSON.parse(localStorage.getItem('cart')) ?? [];
 
@@ -94,7 +107,7 @@ function addCartItem(item) {
   cartWrapper.appendChild(cartCardsWrapper);
 }
 
-if (cartItems.length === 0) {
+function createEmptyCart() {
   const emptyCartContainer = document.createElement('div');
   emptyCartContainer.classList.add('empty-cart-container');
   const emptyCart = document.createElement('h5');
@@ -103,6 +116,11 @@ if (cartItems.length === 0) {
   emptyCart.classList.add('empty-cart-title');
   cartWrapper.appendChild(emptyCartContainer);
 }
+
+if (cartItems.length === 0) {
+  createEmptyCart();
+}
+
 cartItems.forEach((item) => {
   addCartItem(item);
 });

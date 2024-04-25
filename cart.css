@@ -23,7 +23,6 @@
   position: absolute;
   right: 0px;
   top: -19px;
-  height: 10px;
   border: none;
   outline: none;
 }
@@ -43,7 +42,7 @@
   width: 350px;
   /* height: 150px; */
   right: -1px;
-  top: 40px;
+  top: 45px;
   border: rgba(0, 0, 0, 0.266) 1px solid;
 }
 
