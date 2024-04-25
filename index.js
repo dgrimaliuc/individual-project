@@ -264,11 +264,7 @@ dropdownList.addEventListener('click', function (event) {
   if (event.target.tagName === 'LI') {
     const sortOrder = event.target.textContent.toLowerCase();
     const sortedData = sortByName(filteredCards, sortOrder);
-
-    console.log(sortedData);
-    saveDataToLocalStorage(sortedData);
-    filteredCards =
-      JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+    localStorage.setItem('filtered-items', JSON.stringify(sortedData));
 
     cardContainer.innerHTML = '';
 
