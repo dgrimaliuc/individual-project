@@ -1,20 +1,20 @@
-const cardContainer = document.getElementById('card-container');
-const cardTemplate = document.getElementById('card-template');
+const cardContainer = document.getElementById("card-container");
+const cardTemplate = document.getElementById("card-template");
 
 function saveDataToLocalStorage(dataArray) {
-  localStorage.setItem('shop-items', JSON.stringify(dataArray));
+  localStorage.setItem("shop-items", JSON.stringify(dataArray));
 }
 
 function cloneCardTemplate(data) {
   const clone = cardTemplate.content.cloneNode(true);
 
-  const cardImage = clone.querySelector('#card-image');
-  const cardTitle = clone.querySelector('#card-title');
-  const cardDescription = clone.querySelector('#card-description');
-  const cardPrice = clone.querySelector('#card-price');
-  const cardGender = clone.querySelector('#card-gender');
-  const cardColor = clone.querySelector('#card-color');
-  const cardSize = clone.querySelector('#card-size');
+  const cardImage = clone.querySelector("#card-image");
+  const cardTitle = clone.querySelector("#card-title");
+  const cardDescription = clone.querySelector("#card-description");
+  const cardPrice = clone.querySelector("#card-price");
+  const cardGender = clone.querySelector("#card-gender");
+  const cardColor = clone.querySelector("#card-color");
+  const cardSize = clone.querySelector("#card-size");
 
   cardImage.src = data.image;
   cardTitle.textContent = data.title;
@@ -28,28 +28,37 @@ function cloneCardTemplate(data) {
   return clone;
 }
 
+const dropdownIcon = document.getElementById("dropdownIcon");
+const dropdownList = document.getElementById("dropdownList");
+const sortText = document.getElementById("sortText");
 
-const dropdownIcon = document.getElementById('dropdownIcon');
-const dropdownList = document.getElementById('dropdownList');
-const sortText = document.getElementById('sortText');
-
-dropdownIcon.addEventListener('click', function() {
-  dropdownList.style.display = dropdownList.style.display === 'none' ? 'block' : 'none';
+dropdownIcon.addEventListener("click", function () {
+  dropdownList.style.display =
+    dropdownList.style.display === "none" ? "block" : "none";
 });
 
-dropdownList.addEventListener('click', function(event) {
-  if (event.target.tagName === 'LI') {
+dropdownList.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
     const sortOrder = event.target.textContent.toLowerCase();
     const sortedData = sortByName(dataArray, sortOrder);
-   
-    console.log(sortedData);
-   
+
+    console.log(sortedData)
+    saveDataToLocalStorage(sortedData)
+    filteredCards =
+      JSON.parse(localStorage.getItem("filtered-items")) || dataArray;
+
+      cardContainer.innerHTML = '';
+
+      sortedData.forEach((data) => {
+        const cardClone = cloneCardTemplate(data);
+        cardContainer.appendChild(cardClone);
+      });
   }
 });
 
 function sortByName(dataArray, order) {
   return dataArray.sort((a, b) => {
-    if (order === 'ascending') {
+    if (order === "ascending") {
       return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
     } else {
       return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
@@ -57,73 +66,71 @@ function sortByName(dataArray, order) {
   });
 }
 
-
 const dataArray = [
-  
   {
-    title: 'Durable Essence',
-    description: 'High-quality materials that resist wear and tear.',
+    title: "Durable Essence",
+    description: "High-quality materials that resist wear and tear.",
     image:
-      'https://i.pinimg.com/564x/cb/48/04/cb4804a7acc15bf1594ba90070bbc5c6.jpg',
+      "https://i.pinimg.com/564x/cb/48/04/cb4804a7acc15bf1594ba90070bbc5c6.jpg",
     price: 51,
-    gender: 'male',
-    color: 'white',
-    size: 'M',
+    gender: "male",
+    color: "white",
+    size: "M",
   },
   {
-    title: 'Perfect Fit',
-    description: 'Tailored to fit your body perfectly.',
+    title: "Perfect Fit",
+    description: "Tailored to fit your body perfectly.",
     image:
-      'https://i.pinimg.com/564x/e0/84/dd/e084ddaaa060d33ad1758edc86b15f0b.jpg',
+      "https://i.pinimg.com/564x/e0/84/dd/e084ddaaa060d33ad1758edc86b15f0b.jpg",
     price: 30,
-    gender: 'male',
-    color: 'white',
-    size: 'M',
+    gender: "male",
+    color: "white",
+    size: "M",
   },
   {
-    title: 'Affordable Luxe',
-    description: 'Premium quality and style at a great price.',
+    title: "Affordable Luxe",
+    description: "Premium quality and style at a great price.",
     image:
-      'https://i.pinimg.com/564x/9f/c1/4d/9fc14da9b2b20ca11b767cfba1c39a1f.jpg',
+      "https://i.pinimg.com/564x/9f/c1/4d/9fc14da9b2b20ca11b767cfba1c39a1f.jpg",
     price: 42,
-    gender: 'male',
-    color: 'white',
-    size: 'L',
-  },
-  {
-    title: 'Stylish Elegance',
-    description: 'Premium T-shirts for style and comfort.',
-    image: './assets/TShirt-Yellow.webp',
-    price: 62,
-    gender: 'male',
-    color: 'yellow',
-    size: 'XL',
-  },
-  {
-    title: 'Sporty Sophistication',
-    description:
-      'Performance-driven with a stylish edge.',
-    image:
-      'https://i.pinimg.com/564x/4f/2f/da/4f2fda425377c03fed2344c6345cb23c.jpg',
-    price: 54,
-    gender: 'male',
-    color: 'green',
-    size: 'M',
-  },
-  {
-    title: 'Timeless Tradition',
-    description: 'Honoring classic menswear with modern flair.',
-    image:
-      'https://i.pinimg.com/564x/97/40/f6/9740f6ae9f500b8b7dfbd785d891c078.jpg',
-    price: 37,
-    gender: 'female',
-    color: 'purple',
-    size: 'S',
+    gender: "male",
+    color: "white",
+    size: "L",
   },
   {
     title: "Stylish Elegance",
     description: "Premium T-shirts for style and comfort.",
-    image: "https://i.pinimg.com/564x/de/e0/e6/dee0e6494ede76017d51dcc28eec6e8f.jpg",
+    image: "./assets/TShirt-Yellow.webp",
+    price: 62,
+    gender: "male",
+    color: "yellow",
+    size: "XL",
+  },
+  {
+    title: "Sporty Sophistication",
+    description: "Performance-driven with a stylish edge.",
+    image:
+      "https://i.pinimg.com/564x/4f/2f/da/4f2fda425377c03fed2344c6345cb23c.jpg",
+    price: 54,
+    gender: "male",
+    color: "green",
+    size: "M",
+  },
+  {
+    title: "Timeless Tradition",
+    description: "Honoring classic menswear with modern flair.",
+    image:
+      "https://i.pinimg.com/564x/97/40/f6/9740f6ae9f500b8b7dfbd785d891c078.jpg",
+    price: 37,
+    gender: "female",
+    color: "purple",
+    size: "S",
+  },
+  {
+    title: "Stylish Elegance",
+    description: "Premium T-shirts for style and comfort.",
+    image:
+      "https://i.pinimg.com/564x/de/e0/e6/dee0e6494ede76017d51dcc28eec6e8f.jpg",
     price: 32,
     gender: "male",
     color: "blue",
@@ -131,7 +138,8 @@ const dataArray = [
   },
   {
     title: "Performance Max",
-    description: "Breathable, moisture-wicking materials for active lifestyles.",
+    description:
+      "Breathable, moisture-wicking materials for active lifestyles.",
     image:
       "https://i.pinimg.com/564x/88/6c/93/886c9325fe4499c896ad9339d9e1ab5c.jpg",
     price: 24,
@@ -239,13 +247,43 @@ const dataArray = [
     color: "blue",
     size: "M",
   },
+  {
+    title: "Elevated Essentials",
+    description: "Elevated basics to elevate your wardrobe.",
+    image:
+      "https://i.pinimg.com/736x/94/8e/5b/948e5b5ccf6ea60cb68d0807dcd5c96f.jpg",
+    price: 106,
+    gender: "female",
+    color: "red",
+    size: "M",
+  },
+  {
+    title: "Outdoor Modern",
+    description: "Modern style for the great outdoors.",
+    image:
+      "https://i.pinimg.com/564x/fc/89/b8/fc89b8f94d64059abde3817d1c172e87.jpg",
+    price: 86,
+    gender: "female",
+    color: "brown",
+    size: "S",
+  },
+  {
+    title: "Tailored Transition",
+    description: "Versatile pieces for work or play.",
+    image:
+      "https://i.pinimg.com/564x/ad/a7/48/ada74809f9af3c4b4ce769ab88528bed.jpg",
+    price: 76,
+    gender: "male",
+    color: "red",
+    size: "M",
+  },
 ];
 
 saveDataToLocalStorage(dataArray);
 
 function drawCircle(color) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
   const diameter = 20;
 
   canvas.width = diameter;
@@ -259,8 +297,8 @@ function drawCircle(color) {
   return canvas;
 }
 
-const filteredCards =
-  JSON.parse(localStorage.getItem('filtered-items')) || dataArray;
+let filteredCards =
+  JSON.parse(localStorage.getItem("filtered-items")) || dataArray;
 
 filteredCards.forEach((data) => {
   const cardClone = cloneCardTemplate(data);
