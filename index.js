@@ -24,8 +24,12 @@ const dataArray = [
     title: 'Card 2',
     description: 'This is card 2',
     image: 'https://via.placeholder.com/150'
+  },
+  {
+    title: 'Card 2',
+    description: 'This is card 2',
+    image: 'https://via.placeholder.com/150'
   }
-  // ... more data objects
 ];
 
 dataArray.forEach(data => {
