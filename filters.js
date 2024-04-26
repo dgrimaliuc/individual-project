@@ -1,6 +1,4 @@
-// Retrieve selected options from localStorage, or initialize an empty array if not present
 let selectedOptions = JSON.parse(localStorage.getItem('selectedOptions')) || [];
-// Function to update selected options array and localStorage
 function updateSelectedOptions(option, isChecked) {
   if (isChecked) {
     selectedOptions.push(option);

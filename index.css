@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -11,14 +11,14 @@
 /* HEADER */
 
 header {
-  padding-left: 6vw;
-  padding-right: 6vw;
+  width: 90%;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr 2.5fr 1fr;
   height: fit-content;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  font-size: 1.4vw;
+  font-size: 1.3rem;
   align-items: center;
 }
 
@@ -71,8 +71,6 @@ header {
 
 /* BODY */
 .browse_section {
-  padding: 0;
-  margin: 0;
   width: 100%;
   background-color: #f4f4f4;
   height: 25vh;
@@ -80,7 +78,8 @@ header {
   font-weight: 1000;
   align-content: center;
   h1 {
-    padding-left: 8vw;
+    width: 90%;
+    margin: auto;
   }
 }
 
@@ -96,14 +95,6 @@ header {
   }
 }
 
-.products_right_section {
-  /* SORTING SECTION */
-  /* width: 20vw;
-  height: fit-content;
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 3px; */
-}
 
 /* CARDS SECTION */
 .products_right_section {
@@ -117,11 +108,15 @@ header {
 #card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 2vw;
+  justify-content: space-between;
+  gap: 2px;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  margin: 20px 0px;
   width: 20vw;
   border-radius: 15px;
   padding: 20px;
@@ -129,12 +124,71 @@ header {
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#card-image {
+  height: 60%;
+  width: 100%;
+  object-fit: cover;
+}
 .card h2 {
-  margin-top: 0;
 }
 
 .card p {
-  margin: 5px 0;
+  font-size: 0.7rem;
+} 
+
+canvas {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 1px;
+  width: 1.5rem;
+}
+
+.flex_price_color{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+#card-price{
+  border: 1px solid black;
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: black;
+  height: fit-content;
+  width: fit-content;
+  padding: 7px 15px;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  text-align: center;
+  align-content: center;
+}
+
+#add_to_cart_button{
+  box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: fit-content;
+  color: white;
+  border:none;
+  border-radius: 10px;
+}
+
+#add_to_cart_button h3 {
+  height: fit-content;
+  padding: 0.5rem;
+  background-color: rgb(228, 28, 28);
+  color: white;
+  border-radius: 10px;
+}
+.gender_size{
+  display: flex;
+  gap: 0.5rem;
+}
+#card-gender , #card-size{
+  font-size: 1rem;
+  font-weight: 600;
+  background-color:rgb(244,244,244);
+  height: fit-content;
+  width: fit-content;
+  padding: 0.3rem;
 }
 
 @media only screen and (max-width: 600px) {

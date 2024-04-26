@@ -56,16 +56,27 @@
       <!-- MAIN SECTION PRODUCTS -->
       <section class="main_section_products">
         <div class="filter_section" id="filter_section"></div>
-        <!-- THIS IS CARDS, WHICH IS MINE -->
+        <!-- THIS IS CARDS -->
         <div class="products_right_section">
+          <div>sorting section</div>
           <div id="card-container"></div>
           <template id="card-template">
             <div class="card">
               <img id="card-image" src="" alt="Card image" />
-              <div class="card-text">
-                <h2 id="card-title"></h2>
-                <p id="card-description"></p>
+              <h2 id="card-title"></h2>
+              <p id="card-description"></p>
+              <div class="flex_price_color">
+                <p id="card-color"></p>
+                <p id="card-price"></p>
               </div>
+              
+             <div class="gender_size">
+              <p id="card-size"></p>
+              <p id="card-gender"></p>
+             </div>
+             
+              <button type="button" id="add_to_cart_button"><h3><i class="fa-solid fa-cart-shopping"></i> Add to cart</h3></button>
+
             </div>
           </template>
         </div>
