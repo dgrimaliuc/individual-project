@@ -144,6 +144,7 @@ function renderFilterSections(filterOptions) {
   const aside = document.createElement('aside');
   filterOptions.forEach((option) => {
     const section = createFilterSection(option.title, option.options);
+    section.setAttribute('data-t', option.dataT);
     aside.appendChild(section);
   });
   const filterSection = document.getElementById('filter_section');
@@ -154,6 +155,7 @@ const filterOptions = [
   {
     title: 'Price',
     options: ['Under $25', '$25 to $50', '$50 to $100', 'Over $100'],
+    dataT: 'price-section',
   },
   {
     title: 'Color',
@@ -169,14 +171,17 @@ const filterOptions = [
       'Beige',
       'Brown',
     ],
+    dataT: 'color-section',
   },
   {
     title: 'Size',
     options: ['S', 'M', 'L', 'XL'],
+    dataT: 'size-section',
   },
   {
     title: 'Gender',
     options: ['Male', 'Female'],
+    dataT: 'gender-section',
   },
 ];
 

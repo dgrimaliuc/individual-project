@@ -243,6 +243,7 @@ function cloneCardTemplate(data) {
   cardTitle.textContent = data.title;
   cardDescription.textContent = data.description;
   const circle = drawCircle(data.color);
+  circle.setAttribute('data-t', data.color);
   cardColor.appendChild(circle);
   cardPrice.textContent = `$${data.price}`;
   cardSize.textContent = `Size: ${data.size}`;
@@ -258,6 +259,11 @@ const sortText = document.getElementById('sortText');
 dropdownIcon.addEventListener('click', function () {
   dropdownList.style.display =
     dropdownList.style.display === 'none' ? 'block' : 'none';
+});
+
+document.addEventListener('click', (e) => {
+  if (e.target === dropdownIcon) return;
+  dropdownList.style.display = 'none';
 });
 
 dropdownList.addEventListener('click', function (event) {
