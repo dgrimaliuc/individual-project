@@ -9,7 +9,6 @@ let selectedOptions = JSON.parse(localStorage.getItem(filtersKey)) || {
 };
 
 function applyFilter(item, filter) {
-  console.log(filter);
   if (filter[1].length === 0) {
     return true;
   }
@@ -43,7 +42,6 @@ function applyFilter(item, filter) {
 
 function filterItems(options) {
   const allItems = JSON.parse(localStorage.getItem(allCardsKey)) ?? [];
-  console.log('options', options);
 
   const filteredItems = allItems.filter((item) => {
     return Object.entries(options).every((option) => applyFilter(item, option));
