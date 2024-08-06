@@ -71,6 +71,7 @@ function updateSelectedOptions(option, isChecked) {
   location.reload();
 }
 
+console.log(JSON.parse(localStorage.getItem(filtersKey)));
 // Function to create filter sections
 function createFilterSection(title, options) {
   const section = document.createElement('section');
@@ -128,6 +129,15 @@ function createFilterSection(title, options) {
 
     listItem.appendChild(checkbox);
     listItem.appendChild(label);
+    listItem.addEventListener('click', (event) => {
+      if (event.target.tagName === 'INPUT') return;
+      checkbox.checked = !checkbox.checked;
+      var event = document.createEvent('HTMLEvents');
+      event.initEvent('change', false, true);
+      checkbox.dispatchEvent(event);
+      // updateSelectedOptions(`${title}:${option}`, checkbox.checked);
+    });
+
     list.appendChild(listItem);
   });
 

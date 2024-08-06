@@ -269,7 +269,7 @@ document.addEventListener('click', (e) => {
 dropdownList.addEventListener('click', function (event) {
   if (event.target.tagName === 'LI') {
     const sortOrder = event.target.textContent.toLowerCase();
-    const sortedData = sortByName(filteredCards, sortOrder);
+    const sortedData = sortByPrice(filteredCards, sortOrder);
     localStorage.setItem('filtered-items', JSON.stringify(sortedData));
 
     cardContainer.innerHTML = '';
@@ -281,12 +281,12 @@ dropdownList.addEventListener('click', function (event) {
   }
 });
 
-function sortByName(dataArray, order) {
+function sortByPrice(dataArray, order) {
   return dataArray.sort((a, b) => {
     if (order === 'ascending') {
-      return a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1;
+      return a.price < b.price ? -1 : 1;
     } else {
-      return a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1;
+      return a.price > b.price ? -1 : 1;
     }
   });
 }
@@ -308,8 +308,11 @@ function drawCircle(color) {
 
   return canvas;
 }
-
-filteredCards.forEach((data) => {
-  const cardClone = cloneCardTemplate(data);
-  cardContainer.appendChild(cardClone);
-});
+if (filteredCards.length == 0) {
+  cardContainer.innerHTML = '<h1>Nothing to show</h1>';
+} else {
+  filteredCards.forEach((data) => {
+    const cardClone = cloneCardTemplate(data);
+    cardContainer.appendChild(cardClone);
+  });
+}
