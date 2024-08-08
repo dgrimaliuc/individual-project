@@ -3,6 +3,7 @@ const cardTemplate = document.getElementById('card-template');
 
 const dataArray = [
   {
+    id: 1,
     title: 'Durable Essence',
     description: 'High-quality materials that resist wear and tear.',
     image:
@@ -13,6 +14,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 2,
     title: 'Perfect Fit',
     description: 'Tailored to fit your body perfectly.',
     image:
@@ -23,6 +25,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 3,
     title: 'Affordable Luxe',
     description: 'Premium quality and style at a great price.',
     image:
@@ -33,6 +36,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 4,
     title: 'Stylish Elegance',
     description: 'Premium T-shirts for style and comfort.',
     image: './assets/TShirt-Yellow.webp',
@@ -42,6 +46,7 @@ const dataArray = [
     size: 'XL',
   },
   {
+    id: 5,
     title: 'Sporty Sophistication',
     description: 'Performance-driven with a stylish edge.',
     image:
@@ -52,6 +57,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 6,
     title: 'Timeless Tradition',
     description: 'Honoring classic menswear with modern flair.',
     image:
@@ -62,6 +68,7 @@ const dataArray = [
     size: 'S',
   },
   {
+    id: 7,
     title: 'Stylish Elegance',
     description: 'Premium T-shirts for style and comfort.',
     image:
@@ -72,6 +79,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 8,
     title: 'Performance Max',
     description:
       'Breathable, moisture-wicking materials for active lifestyles.',
@@ -83,6 +91,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 9,
     title: 'Classic Blend',
     description: 'Blend of classic style and modern design.',
     image:
@@ -93,6 +102,7 @@ const dataArray = [
     size: 'S',
   },
   {
+    id: 10,
     title: 'Effortless Elegance',
     description: 'Timeless style meets modern comfort.',
     image:
@@ -103,6 +113,7 @@ const dataArray = [
     size: 'S',
   },
   {
+    id: 11,
     title: 'Breathable Bliss',
     description: 'Classic silhouettes with a contemporary twist.',
     image:
@@ -113,6 +124,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 12,
     title: 'Vintage Charm',
     description: 'Lightweight and moisture-wicking for active days.',
     image:
@@ -123,6 +135,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 13,
     title: 'Rugged Resilience',
     description: 'Durable fabrics built to last.',
     image:
@@ -133,6 +146,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 14,
     title: 'Refined Relaxation',
     description: 'Premium quality for elevated everyday wear.',
     image:
@@ -143,6 +157,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 15,
     title: 'Adaptive Adventure',
     description: 'Flexible and functional for any activity.',
     image:
@@ -153,6 +168,7 @@ const dataArray = [
     size: 'S',
   },
   {
+    id: 16,
     title: 'Minimalist Masterpiece',
     description: 'Clean lines and a sleek aesthetic.',
     image:
@@ -163,6 +179,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 17,
     title: 'Coastal Comfort',
     description: 'Breezy designs inspired by the seaside.',
     image:
@@ -173,6 +190,7 @@ const dataArray = [
     size: 'L',
   },
   {
+    id: 18,
     title: 'Tailored Transition',
     description: 'Versatile pieces for work or play.',
     image:
@@ -183,6 +201,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 19,
     title: 'Elevated Essentials',
     description: 'Elevated basics to elevate your wardrobe.',
     image:
@@ -193,6 +212,7 @@ const dataArray = [
     size: 'M',
   },
   {
+    id: 20,
     title: 'Outdoor Modern',
     description: 'Modern style for the great outdoors.',
     image:
@@ -203,6 +223,7 @@ const dataArray = [
     size: 'S',
   },
   {
+    id: 21,
     title: 'Tailored Transition',
     description: 'Versatile pieces for work or play.',
     image:
@@ -233,8 +254,14 @@ function cloneCardTemplate(data) {
   const cardSize = clone.querySelector('#card-size');
 
   clone.querySelector('#add_to_cart_button').addEventListener('click', () => {
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    cartItems.push(data);
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || {};
+    const id = data.id;
+    const item = cartItems[id];
+    if (item) {
+      item.quantity++;
+    } else {
+      cartItems[id] = { ...data, quantity: 1 };
+    }
     localStorage.setItem('cart', JSON.stringify(cartItems));
     location.reload();
   });

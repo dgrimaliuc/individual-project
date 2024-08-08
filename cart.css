@@ -111,9 +111,51 @@
   border-radius: 10px;
 }
 
-/* .cart-wrapper.active h5 {
-  color: #000000;
-} */
 .empty-cart-title {
   font-size: 1.2rem;
+}
+
+.item-quantity {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.quantity-wrapper {
+  position: absolute;
+  right: 5px;
+  bottom: 30px;
+  display: flex;
+  gap: 5px;
+}
+
+.plus-item,
+.minus-item {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(55, 55, 56);
+  color: white;
+  user-select: none;
+}
+
+.total-price {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.order-button {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 100%;
+  padding: 10px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
