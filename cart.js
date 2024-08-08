@@ -1,10 +1,33 @@
-const cartWrapper = document.querySelector('.cart-wrapper');
 const isCartOpenKey = 'isCartOpen';
+
+const cartWrapper = document.querySelector('.cart-wrapper');
+// Create cart cards wrapper
+const cartCardsWrapper = document.createElement('div');
+cartCardsWrapper.classList.add('cart-cards-wrapper');
+
+const orderButton = document.createElement('button');
+orderButton.textContent = 'Order';
+orderButton.classList.add('order-button');
+orderButton.addEventListener('click', () => {
+  alert('Order has been placed!');
+  localStorage.setItem('cart', JSON.stringify({}));
+  localStorage.setItem(isCartOpenKey, false);
+  location.reload();
+});
+
+// Create cart cards wrapper
+const totalPrice = document.createElement('div');
+totalPrice.classList.add('total-price');
+
+// Create caret icon
+const caretIcon = document.createElement('i');
+caretIcon.classList.add('fa', 'fa-caret-up');
+
 const isCartOpen = JSON.parse(localStorage.getItem(isCartOpenKey)) ?? false;
 
 function updateCartState() {
   cartWrapper.classList.toggle('active');
-  localStorage.setItem('isCartOpen', !isCartOpen);
+  localStorage.setItem(isCartOpenKey, !isCartOpen);
 }
 
 const cartButton = document.querySelector('.cart-button');
@@ -20,7 +43,7 @@ document.addEventListener('click', (e) => {
     return;
 
   cartWrapper.classList.remove('active');
-  localStorage.setItem('isCartOpen', false);
+  localStorage.setItem(isCartOpenKey, false);
 });
 
 if (isCartOpen) {
@@ -29,15 +52,7 @@ if (isCartOpen) {
 
 const cartItems = JSON.parse(localStorage.getItem('cart')) ?? [];
 
-function addCartItem(item) {
-  // Create caret icon
-  const caretIcon = document.createElement('i');
-  caretIcon.classList.add('fa', 'fa-caret-up');
-
-  // Create cart cards wrapper
-  const cartCardsWrapper = document.createElement('div');
-  cartCardsWrapper.classList.add('cart-cards-wrapper');
-
+function showCartItem(item) {
   // Create cart card
   const cartCard = document.createElement('div');
   cartCard.classList.add('cart-card');
@@ -62,7 +77,7 @@ function addCartItem(item) {
 
   // Create price paragraph
   const pricePara = document.createElement('p');
-  pricePara.textContent = `Price: ${item.price}`;
+  pricePara.textContent = `Price: $${item.price * item.quantity}`;
 
   // Create color paragraph
   const colorPara = document.createElement('p');
@@ -72,21 +87,59 @@ function addCartItem(item) {
   const sizePara = document.createElement('p');
   sizePara.textContent = `Size: ${item.size}`;
 
+  const quantityWrapper = document.createElement('div');
+  quantityWrapper.classList.add('quantity-wrapper');
+
+  const quantity = document.createElement('label');
+  quantity.textContent = item.quantity;
+  quantity.classList.add('item-quantity');
+
+  const plusItem = document.createElement('div');
+  plusItem.textContent = `+`;
+  plusItem.classList.add('plus-item');
+  plusItem.addEventListener('click', () => {
+    item.quantity++;
+    quantity.textContent = item.quantity;
+    pricePara.textContent = `Price: $${item.price * item.quantity}`;
+    calculateTotal();
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  });
+
+  const minusItem = document.createElement('div');
+  minusItem.textContent = `-`;
+  minusItem.classList.add('minus-item');
+  calculateTotal();
+  minusItem.addEventListener('click', () => {
+    if (item.quantity > 1) {
+      item.quantity--;
+      quantity.textContent = item.quantity;
+      pricePara.textContent = `Price: $${item.price * item.quantity}`;
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    } else {
+      delete cartItems[item.id];
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      location.reload();
+    }
+    calculateTotal();
+  });
+
+  quantityWrapper.appendChild(minusItem);
+  quantityWrapper.appendChild(quantity);
+  quantityWrapper.appendChild(plusItem);
+
   // Append elements to cart card info
   cartCardInfo.appendChild(heading);
   cartCardInfo.appendChild(pricePara);
   cartCardInfo.appendChild(colorPara);
   cartCardInfo.appendChild(sizePara);
+  cartCardInfo.appendChild(quantityWrapper);
 
   // Create remove button
   const removeButton = document.createElement('button');
   removeButton.classList.add('remove-item');
   removeButton.textContent = 'Remove';
   removeButton.addEventListener('click', () => {
-    const index = cartItems.findIndex(
-      (cartItem) => cartItem.title === item.title
-    );
-    cartItems.splice(index, 1);
+    delete cartItems[item.id];
     localStorage.setItem('cart', JSON.stringify(cartItems));
     location.reload();
   });
@@ -117,10 +170,21 @@ function createEmptyCart() {
   cartWrapper.appendChild(emptyCartContainer);
 }
 
-if (cartItems.length === 0) {
+if (Object.values(cartItems).length === 0) {
   createEmptyCart();
 }
 
-cartItems.forEach((item) => {
-  addCartItem(item);
+Object.values(cartItems).forEach((item) => {
+  showCartItem(item);
 });
+
+function calculateTotal() {
+  totalPrice.textContent = `Total: $${Object.values(cartItems).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )}`;
+}
+
+calculateTotal();
+cartCardsWrapper.appendChild(totalPrice);
+cartCardsWrapper.appendChild(orderButton);
