@@ -279,17 +279,19 @@ function cloneCardTemplate(data) {
   return clone;
 }
 
-const dropdownIcon = document.getElementById('dropdownIcon');
+const sortSection = document.querySelector('#dropdownButton');
 const dropdownList = document.getElementById('dropdownList');
 const sortText = document.getElementById('sortText');
 
-dropdownIcon.addEventListener('click', function () {
+sortSection.addEventListener('click', function () {
   dropdownList.style.display =
-    dropdownList.style.display === 'none' ? 'block' : 'none';
+    dropdownList.style.display === 'none' || !dropdownList.style.display
+      ? 'block'
+      : 'none';
 });
 
 document.addEventListener('click', (e) => {
-  if (e.target === dropdownIcon) return;
+  if (e.target === sortSection) return;
   dropdownList.style.display = 'none';
 });
 
