@@ -159,3 +159,14 @@
   border: none;
   cursor: pointer;
 }
+
+#dropdownIcon {
+  pointer-events: none;
+}
+
+#dropdownButton {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
