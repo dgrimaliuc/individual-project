@@ -39,7 +39,8 @@ const dataArray = [
     id: 4,
     title: 'Stylish Elegance',
     description: 'Premium T-shirts for style and comfort.',
-    image: './assets/TShirt-Yellow.webp',
+    image:
+      'https://i.pinimg.com/564x/9c/42/7f/9c427f112ef416b4fc1f0df3f5765a59.jpg',
     price: 62,
     gender: 'male',
     color: 'yellow',
